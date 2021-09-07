@@ -39,6 +39,85 @@ Umożliwia:
 * Problem z plikami dużych rozmiarów (pobieranie wszystkich z centralnego repozytorium).
 * Nie jest zbyt przyjazny dla użytkownika (wysoki próg wejścia)
 
+## Instalacja i konfiguracja
+
+### Windows
+- Instalacja za pomocą instalatora [Instalator](https://git-scm.com/download/win)
+- Instalacja za pomocą `winget install git`
+
+### Systemy linux oparte na dystrybucji debian
+
+```bash
+sudo apt update
+sudo apt upgrade
+sudo apt install git
+```
+
+## Konfiguracja
+Kolejność pobierania konfiguracji:
+1. Folder projektu
+2. Folder użytkownika
+3. Folder systemowy
+
+```bash
+git config --local user.name
+git config --global user.name
+git config --system user.name
+```
+
+Konfiguracja adresu email i nazwy użytkownika:
+
+```bash
+# Ustawienie tożsamości
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+
+# Ustawienie visual studio jako domyślny edytor
+git config --global core.editor "code --wait"
+
+# sprawdzenie bieżących ustawień
+git config --list
+# Wyświetlenie konfiguracji wraz z informacją o źródle jej pochodzenia
+git config --list --show-origin
+```
+
+> Ustawienie vsc jako edytor podglądu zmian
+
+```bash
+# .gitconfig w katalogu użytkownika
+git config --global -e
+
+# lub
+git config --edit --global
+```
+
+```conf
+[diff]
+    tool = vscode-diff
+[difftool]
+	prompt = false
+[difftool "vscode-diff"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+```
+
+### Instalacja git-aliases dla powershell
+
+```powershell
+Install-Module git-aliases -Scope CurrentUser -AllowClobber
+
+# jeśli konieczna jest zmiana uprawnień ze względu na błąd podczas instalacji
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Otwieramy plik profilu i dodajemy import
+```powershell
+code $PROFILE
+```
+
+```conf
+# dodajemy linie
+Import-Module git-aliases -DisableNameChecking
+```
 ## Przepływ pracy
 
 1. Pobranie kodu z serwera kontroli wersji
@@ -151,6 +230,10 @@ git rebase -i <hash_commit>
 
 ### MERGE i REBASE
 
+> Narzędzie scalania
+```bash
+git mergetool
+```
 
 Scalanie `merge` polega na połączeniu dwóch gałęzi w jedną, czyli na. włączenie gałęzi z nowymi funkcjonalnościami do gałęzi `main`. Gdy jesteśmy na gałęzi main wykonujemy łączenie za pomocą komendy `git marge <feature_branch>`. Łączenie za pomocą samego `merge` tworzy nową migawkę która jest wspólna dla obydwu gałęzi.
 
@@ -642,6 +725,9 @@ git push -d <remote_name> <branch_name>
 Polecenie `git diff` służy do porównywania zmian pomiędzy trzema obszarami w których mogą znajdować się pliki (working directory, index, repository)
 
 ```bash
+# Narzędzie diftool
+git difftool
+
 # porównuje zmiany pomiędzy katalogiem roboczym a indeksem
 git diff
 
