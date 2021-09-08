@@ -315,6 +315,9 @@ pwd
 > Inicjalizacja nowego repozytorium GIT
 ```bash
 git init
+
+# tworzenie pustego repozytorium bez folderu roboczego
+git init --bare
 ```
 > Dodanie wszystkich plików do śledzenia
 ```bash
