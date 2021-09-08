@@ -1,6 +1,7 @@
 # GIT NOTE
 
 ## Linki
+
 [Podstawowe polecenia](https://training.github.com/downloads/pl/github-git-cheat-sheet/)
 
 [GIT Manual](https://git-scm.com/book/en/v2)
@@ -11,7 +12,6 @@
 
 [GIT School Visualizing](https://git-school.github.io/visualizing-git/#free)
 
-
 ```bash
 git help
 ```
@@ -21,6 +21,7 @@ git help
 > Git jest systemem kontroli wersji *VCS* - Version Control System, rejestruje wprowadzone zmiany w pliku lub w plikach w czasie.
 
 Umożliwia:
+
 * Cofanie zmian w pliku lub całego projektu.
 * Umożliwia podgląd zmian które zostały wprowadzone na przestrzeni czasu.
 * Umożliwia podgląd kto wprowadził zmiany.
@@ -28,12 +29,14 @@ Umożliwia:
 * Może być wykorzystany dla dowolnego typu pliku, nie tylko dla kodu źródłowego.
 
 ## Zalety
+
 * Szybkość
 * Mądry
 * Elastyczny
 * Bezpieczny
 
 ## Wady
+
 * Brak kontroli dostępu.
 * Brak blokowania pliku nad którym się pracuje (czasem zaleta bo lepiej rozwiązać konflikty niż blokować pracę).
 * Problem z plikami dużych rozmiarów (pobieranie wszystkich z centralnego repozytorium).
@@ -42,8 +45,9 @@ Umożliwia:
 ## Instalacja i konfiguracja
 
 ### Windows
-- Instalacja za pomocą instalatora [Instalator](https://git-scm.com/download/win)
-- Instalacja za pomocą `winget install git`
+
+* Instalacja za pomocą instalatora [Instalator](https://git-scm.com/download/win)
+* Instalacja za pomocą `winget install git`
 
 ### Systemy linux oparte na dystrybucji debian
 
@@ -54,7 +58,9 @@ sudo apt install git
 ```
 
 ## Konfiguracja
+
 Kolejność pobierania konfiguracji:
+
 1. Folder projektu
 2. Folder użytkownika
 3. Folder systemowy
@@ -91,11 +97,11 @@ git config --global -e
 git config --edit --global
 ```
 
-```conf
+```markdown
 [diff]
     tool = vscode-diff
 [difftool]
-	prompt = false
+ prompt = false
 [difftool "vscode-diff"]
     cmd = code --wait --diff $LOCAL $REMOTE
 ```
@@ -110,6 +116,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 Otwieramy plik profilu i dodajemy import
+
 ```powershell
 code $PROFILE
 ```
@@ -118,6 +125,7 @@ code $PROFILE
 # dodajemy linie
 Import-Module git-aliases -DisableNameChecking
 ```
+
 ## Przepływ pracy
 
 1. Pobranie kodu z serwera kontroli wersji
@@ -133,7 +141,6 @@ Import-Module git-aliases -DisableNameChecking
 > Working Area
 Miejsce w którym przechowywane są bieżące pliki i foldery (folder roboczy projektu)
 Lokalizacja na dysku gdzie pliki są tworzone, modyfikowane lub kasowane. Po zatwierdzeniu zmian pliki trafiają do repozytorium.
-
 > Index
 Miejsce do którego trafiają pliki przed zatwierdzeniem (commitem)
 
@@ -143,11 +150,11 @@ Polecenie `add` dodaje pliki do indeksu a `commit` przenosi je do repozytorium.
 > Repozytorium
 Całe repozytorium Git przechowywane jest w katalogu `.git`. Przechowuje on zatwierdzenia oraz całą historie projektu.
 Katalog `objects` przechowuje różne typy:
-
 > Obiekty dzielimy na:
-- blob (zawartość plików w pewnym momencie historii)
-- tree (reprezentują foldery w projekcie)
-- commit (są tworzone za każdym razem kiedy wykonujemy zatwierdzenie commit)
+
+* blob (zawartość plików w pewnym momencie historii)
+* tree (reprezentują foldery w projekcie)
+* commit (są tworzone za każdym razem kiedy wykonujemy zatwierdzenie commit)
 
 :bulb: Wszystkie te obiekty są niezmienne, można je dodawać, usuwać ale nigdy nie można ich zmienić.
 
@@ -170,15 +177,17 @@ Polecenie `git add` nie tylko dodaje nowe pliki ale tworzy zamraża również ob
 Główna gałąź to `Main` (dawniej Master)
 
 Repozytoria
-- Lokalne (Local)
-- Zdalne (Origin)
 
-## Przepływ pracy
-- Inicjalizacja repozytorium w katalogu roboczym
-- Dodanie plików które chcemy śledzić
-- Zmiany w pliku znajdującego się w katalogu roboczym
-- Dodanie zmian do indeksu (`git add <file_name>)`
-- Zatwierdzenie zmian i dodanie zatwierdzenia do repozytorium (`git commit`)
+* Lokalne (Local)
+* Zdalne (Origin)
+
+## Przepływ prac*
+
+* Inicjalizacja repozytorium w katalogu roboczym
+* Dodanie plików które chcemy śledzić
+* Zmiany w pliku znajdującego się w katalogu roboczym
+* Dodanie zmian do indeksu (`git add <file_name>)`
+* Zatwierdzenie zmian i dodanie zatwierdzenia do repozytorium (`git commit`)
 
 Zwykle przepływ pracy odbywa się ze strony lewej do prawej
 `working directory` -> `index` -> `repository`
@@ -186,12 +195,12 @@ Zwykle przepływ pracy odbywa się ze strony lewej do prawej
 Jeśli chcemy zmienić kierunek przepływu możemy wykorzystać polecenie `git checkout`.
 
 Pozwala ono na:
-- Zmianę położenia wskaźnika `HEAD` na inna gałąź (pośrednio będzie wskazywało na wybrany commit na tej gałęzi)
-- Pobierze dane z tego zatwierdzenia i przywróci (skopiuje) z niego pliki do katalogu roboczego i indeksu (pliki we wszystkich obszarach są identyczne i zgodne z commitem na który wskazuje `HEAD`).
 
-
+* Zmianę położenia wskaźnika `HEAD` na inna gałąź (pośrednio będzie wskazywało na wybrany commit na tej gałęzi)
+* Pobierze dane z tego zatwierdzenia i przywróci (skopiuje) z niego pliki do katalogu roboczego i indeksu (pliki we wszystkich obszarach są identyczne i zgodne z commitem na który wskazuje `HEAD`).
 
 ### Detached HEAD
+
 Znacznik `HEAD` zwykle wskazuje na branch, ale Git może pracować również w trybie `odłączonej głowy`, oznacza to że wskaźnik `Head` nie zawsze musi wskazywać na gałąź. Może wskazywać na konkretny commit poprzez polecenie `git checkout <hash_commit>` (może to być aktualny commit).
 Możemy wtedy dodawać kod i eksperymentować, jeśli nie zdecydujemy się na zapisanie zmian wskaźnik przełączamy na gałąź np. `main` poprzez `git switch main`
 Niezapisane commity przestaną po jakimś czasie istnieć w bazie danych wyczyszczone przez **garbage collector**, możemy je jednak zapisać na nowej gałęzi korzystając z ich **hash** do póki są widoczne w logach konsoli.
@@ -199,8 +208,8 @@ W trybie odłączonej głowy nadal możemy tworzyć commity, należy wówczas pr
 
 Miejsce wskaźnika możemy sprawdzić za pomocą `git branch`.
 
-
 ## REBASE
+
 > :exclamation: Nie należy używać `rebase` na gałęziach publicznych
 
 * Oczyszczanie historii gałęzi przed jej wysłaniem
@@ -208,10 +217,12 @@ Miejsce wskaźnika możemy sprawdzić za pomocą `git branch`.
 
 ### Zmiany historii lokalnej przed wysłaniem zmian do zdalnego repozytorium
 
-# Dodanie kolejnych zmian w projekcie / pliku do wcześniejszego commit
+## Dodanie kolejnych zmian w projekcie / pliku do wcześniejszego commit
+
 ```bash
 git commit --amend
 ```
+
 :bulb: Podczas commit z parametrem `amend` git nie modyfikuje ostatniego commit ponieważ są one niezmienne zamiast tego tworzy nową kopie z dodaną zawartością i przenosi nia nią znacznik `HEAD`, stary commit zostanie w przyszłości usunięty przez **garbage collector**. Działa tylko dla ostatniego zatwierdzenia.
 
 :exclamation: Polecenie zmienia historie więc stosujemy tylko na gałęziach lokalnych.
@@ -227,27 +238,24 @@ Jeśli chcemy naprawić/zmienić historie wcześniejszych commitów musimy upewn
 git rebase -i <hash_commit>
 ```
 
-
 ### MERGE i REBASE
 
 > Narzędzie scalania
+
 ```bash
 git mergetool
 ```
 
 Scalanie `merge` polega na połączeniu dwóch gałęzi w jedną, czyli na. włączenie gałęzi z nowymi funkcjonalnościami do gałęzi `main`. Gdy jesteśmy na gałęzi main wykonujemy łączenie za pomocą komendy `git marge <feature_branch>`. Łączenie za pomocą samego `merge` tworzy nową migawkę która jest wspólna dla obydwu gałęzi.
 
-
 Innym sposobem łączenia jest `rebase`.
  Polega to na zaciągnięciu zmian z poziomu `feature` z gałęzi `main` poprzez `git rebase master`, a następnie wykonania scalenia z poziomu gałęzi `main` poleceniem `git merge feature`. Przy tym sposobie commity zachowują swoją historię zmian. Przy stosowaniu tego sposobu ważne jest częste zaciąganie/rebase zmian z gałęzi master aby unikać dużej ilości konfliktów przy łączeniu.
 
 :exclamation: Historia jest zachowana na jednej lini czasowej ale nie odzwierciedla dokładnie tego co się działo w projekcie
 
-
-- `git switch main` Aktualizujemy main `git pull --rebase` (przy korzystaniu z repozytorium zdalnego)
-- Zamieniamy branch `git switch feature` a następnie `git rebase main`
-- Zmieniamy gałąź na main `git switch main` i scalamy `git merge feature`
-
+* `git switch main` Aktualizujemy main `git pull --rebase` (przy korzystaniu z repozytorium zdalnego)
+* Zamieniamy branch `git switch feature` a następnie `git rebase main`
+* Zmieniamy gałąź na main `git switch main` i scalamy `git merge feature`
 
 ### Cherry Pick
 
@@ -262,10 +270,10 @@ git cherry-pick --continue
 
 ### TAGI
 
-
 Tagi to rodzaj zakładki przy pomocy których możemy oznaczać ważne commity. Najczęściej oznaczmy commity które wskazują koniec pracy nad daną funkcjonalnością lub kolejną wersją aplikacji.
 
 Tagi dzielimy na dwie kategorie
+
 * lekkie (bez adnotacji)
 * z adnotacją (tworzą w strukturze dodatkowe miejsce na zapisanie dodatkowych danych)
 
@@ -313,23 +321,28 @@ pwd
 
 ---
 > Inicjalizacja nowego repozytorium GIT
+
 ```bash
 git init
 
 # tworzenie pustego repozytorium bez folderu roboczego
 git init --bare
 ```
+
 > Dodanie wszystkich plików do śledzenia
+
 ```bash
 git add .
 ```
 
 > Zatwierdzenie zmian z komentarzem
+
 ```bash
 git commit -m "Init Commit"
 ```
 
 > Dodanie lokalnego repozytorium do repozytorium zdalnego GitHub
+
 ```bash
 git remote add origin https://github.com/{user}/{repo-name}.git
 
@@ -337,8 +350,11 @@ git remote add origin https://github.com/{user}/{repo-name}.git
 git branch -M main
 git push -u origin main
 ```
+
 ## Podstawowe komendy
+
 > Sprawdza status
+
 ```bash
 # Wersja pełna
 ## gst
@@ -354,6 +370,7 @@ git show <hash_commit>
 ```
 
 > Sprawdzenie historii commit
+
 ```bash
 # wszystkie zmiany
 ## glgg
@@ -393,6 +410,7 @@ git log --stat
 ## glgp
 git log --stat -p
 ```
+
 > Przeglądanie i odzyskiwanie referencji ze zmian
 
 Reflog pozwala na dokładne przeglądanie historii (po których elementach poruszał się znacznik `HEAD`). możemy z niego odzyskać dane np. hash zmian które zostały wprowadzone poprzez wykorzystanie interaktywnego rebase. Dane są widoczne do momentu zebrania ich przez **garbage collector**.
@@ -401,7 +419,6 @@ Reflog zawiera dane lokalne.
 ```bash
 git reflog
 ```
-
 
 > Sprawdzenie jaka które commit zmieniały wartość zawartość pliku
 
@@ -419,10 +436,10 @@ Pliki mogą być zmodyfikowane w różnych miejscach
 | ?      | ?        | File4     |
 
 Oznaczenia liter
+
 * `A` - Nowy plik w staged
 * `M` - Zmodyfikowany plik
 * `?` - Nowy nie śledzony plik w katalogu roboczym
-
 
 > Dodawanie pliku i zmian do **staging**
 
@@ -442,6 +459,7 @@ git add --patch <file_name>
 ```
 
 > Commit zmian
+
 ```bash
 git commit -m "Message"
 
@@ -449,6 +467,7 @@ git commit -m "Message"
 # gcam
 git commit -am "Message"
 ```
+
 > Wycofanie wprowadzonych zmian
 
 Istnieją różne sposoby przywracania projektu jak również pojedynczego pliku.
@@ -462,8 +481,6 @@ W katalogu zostaną wczytane pliki z określonego commit.
 Jeśli zdecydujemy się na użycie go na pliku zostanie wczytana jego wersja z podanego commit.
 
 Przy zastosowaniu polecenia `git checkout <hash_commit>` przechodzimy w tryb `detached HEAD` (tryb odłączonej głowy 😄). Pozwala to przeglądać i eksperymentować bez zapisywania zmian. Jeśli jednak zdecydujemy się na ich zapisanie możemy użyć komendy `git checkout -b <branch_name>`.
-
-
 
 ``` bash
 # Przywrócenie wybranego commit
@@ -480,7 +497,6 @@ git switch master
 ```
 
 > `git reset`
-
 
 Polecenie zmienia bieżącą gałąź a co się z tym wiąże zmienia również bieżące zatwierdzenie.
 `git reset` to wyspecjalizowane polecenie dzięki któremu możemy przenieść się na dowolny commit (poprzez zmianę gałęzi). Zmiana jest dokonywana razem ze znacznikiem `HEAD`. Aktualnym zatwierdzeniem jest to wybrane przez `git reset`.
@@ -527,8 +543,6 @@ git reset HEAD <file_name>
 
 :exclamation: Niestety nie jest możliwe przywrócenie pojedynczego pliku z opcją `--hard` za miast tego należy użyć (w tym przypadku `checkout` nie spowoduje zmiany `HEAD`)
 
-
-
 ```bash
 git checkout HEAD --hard <file_name>
 ```
@@ -543,8 +557,6 @@ Pozwala bezpiecznie przywracać zmiany które znajdują się już w repozytorium
 git revert <hash_commit>
 ```
 
-
-
 > Pobieranie zmian ze zdalnego repozytorium
 
 `git pull` to połączenie `git fetch` i `git rebase`
@@ -556,9 +568,8 @@ git pull --rebase
 git pull --all
 ```
 
-
-
 > Dodanie nowej gałęzi/branch
+
 ```bash
 git checkout -b <branch_name>
 
@@ -567,6 +578,7 @@ git switch -c <branch_name>
 ```
 
 > Zmiana nazwy gałęzi
+
 ```bash
 # Zmiana nazwy gałęzi na której się obecnie znajdujemy
 git branch -m <new_branch_name>
@@ -576,6 +588,7 @@ git branch -m <old_branch_name> <new_branch_name>
 ```
 
 > Przełączenie się pomiędzy gałęziami/branch
+
 ```bash
 # git checkout master
 git checkout <branch_name>
@@ -585,6 +598,7 @@ git switch <branch_name>
 ```
 
 > Sprawdzenie dostępnych gałęzi/branch
+
 ```bash
 git branch
 ```
@@ -611,6 +625,7 @@ git stash --include-untracked
 ```
 
 > Podejrzenie odłożonych zmian na stosie wraz z identyfikatorem
+
 ```bash
 git stash list
 # stash@{0}: On feature: Nowa zmiana w schowku
@@ -630,12 +645,14 @@ git stash apply
 git stash pop stash@{0}
 ```
 
+## więcej szczegółów
 
-# więcej szczegółów
+```bash
 git stash show
 ```
 
 > Usunięcie zmiany ze schowka
+
 ```bash
 # wyczyszczenie konkretnej zmiany
 git stash drop stash@{0}
@@ -645,11 +662,13 @@ git stash clear
 ```
 
 > Utworzenie nowego branch ze zmian zapisanych na stosie
+
 ```bash
 git stash branch <new_branch_name>
 ```
 
 > Informacje o zdalnym repozytorium
+
 ```bash
 git remote
 git remote -v
@@ -657,13 +676,12 @@ git remote -v
 ```
 
 > Dodanie zdalnego repozytorium
+
 ```bash
 git remote add <name> <remote_url>
 ```
 
 > Wypychanie zmian do zdalnego repozytorium
-
-
 
 ```bash
 # git push origin master
@@ -685,6 +703,7 @@ mv <old_file_name> <new_file_name>
 ```
 
 Jeśli chcemy zastosować operację zmiany nazwy możemy wykorzystać polecenie wbudowane w Git `git mv <old_name> <new_name>`
+
 ```bash
 git mv <old_file_name> <new_file_name>
 ```
@@ -694,12 +713,14 @@ git mv <old_file_name> <new_file_name>
 Jeśli dodamy lik do indeksu, ale nie wykonamy commit (plik znajduje się w obszarze roboczym i indeksie), git podczas próby usunięcia wyświetli błąd, zapobiega to przypadkowemu usunięciu plików których jeszcze nie ma w repozytorium.
 
 W takim przypadku możemy zdecydować się na usunięcie pliku
-- Z indeksu `git rm --cached` (pozostawienie go w katalogu roboczym)
-- Z indeksu i obszaru roboczego `git rm -f`
+
+* Z indeksu `git rm --cached` (pozostawienie go w katalogu roboczym)
+* Z indeksu i obszaru roboczego `git rm -f`
 
 Gdy usuniemy plik z indeksu możemy go również usunąć z projektu, git się nim już nie interesuje.
 
 > Przed dodaniem pliku do repozytorium (nie był wykonany commit)
+
 ```bash
 # Usuwa plik z indeksu ale zachowuje go w katalogu roboczym, po tym poleceniu plik przestaje być śledzony przez Git
 git rm --cached
@@ -708,9 +729,8 @@ git rm --cached
 git rm -f
 ```
 
-
-
 > Usunięcie gałęzi lokalne
+
 ```bash
 # Usunięcie gałęzi lokalnie
 git branch -d <branch_name>
@@ -760,9 +780,8 @@ git diff -w
 git diff HEAD HEAD~2
 ```
 
-
-
 > Scalanie zmian z innej gałęzi/ **Merge**
+
 ```bash
 # Przełączamy się na branch do którego chcemy dodać zmiany przeważnie main
 git checkout main
@@ -789,22 +808,25 @@ git rebase --continue
 
 Aby wykluczyć pliki z repozytorium git należy utworzyć plik `.gitignore`
 
-
-
 ## Narzędzia
+
 ### VIM
 
 > Edytowanie
+
 ```bash
 a
 ```
+
 > Wyjście i zapisanie
+
 ```bash
 :x
 :wq
 ```
 
 ### Visual Studio Code
+
 ```bash
 git config --global core.editor "code --wait"
 ```
@@ -812,7 +834,9 @@ git config --global core.editor "code --wait"
 ## Praca z GIT
 
 ### Podstawkowe zasady
+
 * Podczas wprowadzania nowej funkcjonalności tworzymy nowy `branch`
+
 ## Do Sprawdzenia
 
 Gdy dodamy zmodyfikujemy plik bez dodania do staged `git add` możemy wycofać zmiany `git restore <plik>`
@@ -820,7 +844,9 @@ Gdy dodamy zmodyfikujemy plik bez dodania do staged `git add` możemy wycofać z
 Gdy dodamy pliki do `stage` za pomocą `git add <plik>` możemy wycofać ten stage za pomocą `git restore --stage` a następnie przywrócić ich stan z ostatniej migawki za pomocą `git restore <plik>`
 
 Przy korzystaniu z WSL i personal token na github konieczne podlinkowanie credential managera z windowsa do debiana
+
 ```bash
 git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"
 ```
+
 C:\Users\kudzi\OneDrive\Dokumenty\WindowsPowerShell\Modules\oh-my-posh\3.175.0\themes

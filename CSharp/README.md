@@ -1,4 +1,5 @@
 # 20210821_CSharp_The_Big_Picture
+
 Pluralsight
 
 C# jest językiem
@@ -10,11 +11,12 @@ C# jest językiem
 - Jest OpenSource
 - Jest multiplatformowy
 
-
 ## GetType
+
 [GetType - MS Docs](https://docs.microsoft.com/pl-pl/dotnet/api/system.object.gettype?view=net-5.0)
 
 ## Aggregate
+
 [Enumerable.Aggregate - MS Docs](https://docs.microsoft.com/pl-pl/dotnet/api/system.linq.enumerable.aggregate?view=net-5.0#main)
 
 ```C#
@@ -27,7 +29,7 @@ System.Console.WriteLine(CountAddNumbers);
 var SumNumber = numbers.Aggregate(0, (total, next) => total + next);
 System.Console.WriteLine(SumNumber);
 
-// Porównuje ilość znaków w nazwie i zwraca dłuższą 
+// Porównuje ilość znaków w nazwie i zwraca dłuższą
 string[] fruits = { "apple", "mango", "orange", "passionfruit", "grape" };
 string longestName =
     fruits.Aggregate("banana",
@@ -38,12 +40,13 @@ string longestName =
 ```
 
 ## Właściwości (properties)
+
 ```C#
 // Właściwości służą do walidacji ustawianych lub zwracanych parametrów
-// Metoda ToString() nadpisana przy pomocy wyrażenia lambda 
+// Metoda ToString() nadpisana przy pomocy wyrażenia lambda
 public class Point
 {
-    // init - ustawia wartość podczas tworzenia obiektu klasy, po przypisaniu wartości nie można zmienić z zewnątrz. 
+    // init - ustawia wartość podczas tworzenia obiektu klasy, po przypisaniu wartości nie można zmienić z zewnątrz.
     public int X { get; init; }
     public int Y { get; init; }
 
@@ -52,6 +55,7 @@ public class Point
 ```
 
 Ustawienie properties w zależności od podanej daty
+
 ```C#
 enum Generation { BabyBoomer, GenX, Millennial, GenZ, GenA }
 
