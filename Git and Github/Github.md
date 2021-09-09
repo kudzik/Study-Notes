@@ -56,12 +56,12 @@ Tylko określeni użytkownicy mają dostęp do jego przeglądania lub wprowadzan
 
 `README.md` - główna strona repozytorium
 
-`CODEOWNERS` - plik z danymi właścicieli kodu. Dzięki dodaniu pliku osoby które są w nim wymienione otrzymają automatyczne powiadomienie gdy zostanie wykonane żądanie `pull request`
+<!-- `CODEOWNERS` - plik z danymi właścicieli kodu. Dzięki dodaniu pliku osoby które są w nim wymienione otrzymają automatyczne powiadomienie gdy zostanie wykonane żądanie `pull request`
 
 ```markdown
 * @github_username
 /docs/ @github_username
-```
+``` -->
 
 ## Cechy repozytorium
 
@@ -77,9 +77,45 @@ Tylko określeni użytkownicy mają dostęp do jego przeglądania lub wprowadzan
 
 ## Praca z gałęziami
 
-Zmiany kodu takie jak np. dodanie nowej funkcjonalności powinny odbywać się na innej gałęzi niż główna. Po zakończeniu pracy nad nową funkcją dodatkową gałąź należy scalić z główną (najczęściej `master` lub `main`).
+Zmiany kodu takie jak np. dodanie nowej funkcjonalności, naprawa błędów lub eksperymenty powinny odbywać się na innej gałęzi niż główna. Po zakończeniu pracy nad nową funkcją dodatkową gałąź należy scalić z główną (najczęściej `master` lub `main`).
+
+Zmiany wprowadzone na gałęzi sa widoczne tylko na niej, na głównej pojawią się dopiero po scaleniu.
+
+```bash
+git branch
+git checkout <branch_name>
+git switch <branch_name>
+git checkout -b <new_branch_name>
+git switch -c <new_branch_name>
+```
 
 ## Przepływ pracy
+
+Istnieją różne modele pracy z github:
+
+- Centralized Workflow
+- Forking Workflow
+- GitFlow Workflow
+- GitHub Workflow
+
+Preferowanym podejściem przez gita jest **GitHub Workflow** :blush:
+
+Polega na dodawaniu gałęzi na których rozwiązuje się problemy, na innych dodaje się nowe funkcjonalności. Gdy zakończymy prace wysyłamy `pull request` celem scalenia zmian z główną gałęzią `main`. Dodawane gałęzie są lokalne można na nich robić zmiany i commity bez wpływu na pracę innych osób.
+
+Po utworzeniu `pull request` inne osoby mogą podglądać zmiany oraz brać udział w dyskusji nad wprowadzonymi zmianami.
+
+Z **pull request** możemy korzystać nie tylko po skończeniu pracy nad kodem, może nam służyć do dyskusji, zadawaniu pytań związanych z pracą, code review czy sugestii odnośnie kodu.
+
+:bulb: **Pull request** możemy tworzyć z poziomu GitHub w zakładce gałęzie (branches).
+
+Typowe konflikty:
+
+- Edycja tej samej linii kodu
+- Edycja pliku który został usunięty
+
+Tworzenie `pool request template / PR Template`
+
+W katalogu głównym należy utworzyć plik `pull_request_template.md` [Example](https://github.com/kudzik/Study-Notes/blob/main/Git%20and%20Github/Files_Example/pull_request_template.md)
 
 ## Rozwidlenia
 
