@@ -113,11 +113,35 @@ Typowe konflikty:
 - Edycja tej samej linii kodu
 - Edycja pliku który został usunięty
 
-Tworzenie `pool request template / PR Template`
+Utworzenie szablonu `pool request template / PR Template` pozwala zachować jednolity sposób komunikacji podczas dodawania pull request. W szablonie możemy określić jakie informacje są wymagane oraz ich format. Zostanie on automatycznie wczytany podczas żądania pull request.
 
 W katalogu głównym należy utworzyć plik `pull_request_template.md` [Example](https://github.com/kudzik/Study-Notes/blob/main/Git%20and%20Github/Files_Example/pull_request_template.md)
 
-## Rozwidlenia
+**Wycofanie** pull request stworzy nowy pull request który umożliwi wycofanie zmian.
+
+## Rozwidlenia / Fork
+
+Jest to kopia oryginalnego repozytorium przypisana do naszego konta na github, zmiany na niej nie mają wpływu na oryginalne, dodatkowo gdy zostanie zaktualizowana wersja oryginalna możemy również zaktualizować naszą kopię.
+
+Gdy zaktualizujemy zmianami naszą kopię możemy również wysłać `pull request` który zaktualizuje po zatwierdzeniu oryginalne repozytorium.
+
+Takim repozytorium możemy zarządzać jak własnym (ustawiać współpracowników, zarządzać dostępem)
+
+## Praca z Zagadnieniami/Issues
+
+Issues na github to nie tylko problemy, to bardzo rozbudowane informacje o tym co się dzieje w projekcie, pozwalają na korzystanie z powiadomień co ułatwia komunikację.
+
+- Bugi/Bug
+- Ulepszenia/Enhancements
+- Zadania/Task
+- Pomysły/Ideas
+
+Issues mogą być kategoryzowane za pomocą etykiet/labels. Wstępnie zdefiniowane jest ich kilkanaście ale możemy również tworzyć własne.
+
+Zarządzanie i śledzenie issue zapewnia wbudowany w github `issue tracker`. Zagadnienia możemy przypisywać do konkretnych osób i zarządzań ich stanem tworząc **Projekt**.
+
+:bulb: Do `Issues`, `Pull request`, `Merge` możemy się odwoływać poprzez `#` w komentarzach zostanie automatyczne wyświetlona lista z której możemy wybrać interesującą nas aktywność posiada swoje `Id`.
+
 
 ## Podstawowe polecenia
 
