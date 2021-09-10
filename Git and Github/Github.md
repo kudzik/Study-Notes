@@ -142,7 +142,11 @@ Zarządzanie i śledzenie issue zapewnia wbudowany w github `issue tracker`. Zag
 
 :bulb: Do `Issues`, `Pull request`, `Merge` możemy się odwoływać poprzez `#` w komentarzach zostanie automatyczne wyświetlona lista z której możemy wybrać interesującą nas aktywność posiada swoje `Id`.
 
+W ustawieniach możemy wybrać szablony/templates dla `issues`.
 
+## Kamienie milowe/Milestones
+
+Pozwalają śledzić czy udało nam się dotrzeć do określonego założenia które miało znaleźć się w projekcie. Zazwyczaj odbywa się to za pomocą `issue`. Kamienie milowe zazwyczaj zawierają termin wykonania, jego procent, listę otwartych zagadnień i żądań ściągnięcia.
 ## Podstawowe polecenia
 
 `git clone` - wykonuje pełną kopię zdalnego repozytorium do lokalnego folderu.
