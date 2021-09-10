@@ -204,7 +204,7 @@ Pozwala ono na:
 Znacznik `HEAD` zwykle wskazuje na branch, ale Git może pracować również w trybie `odłączonej głowy`, oznacza to że wskaźnik `Head` nie zawsze musi wskazywać na gałąź. Może wskazywać na konkretny commit poprzez polecenie `git checkout <hash_commit>` (może to być aktualny commit).
 Możemy wtedy dodawać kod i eksperymentować, jeśli nie zdecydujemy się na zapisanie zmian wskaźnik przełączamy na gałąź np. `main` poprzez `git switch main`
 Niezapisane commity przestaną po jakimś czasie istnieć w bazie danych wyczyszczone przez **garbage collector**, możemy je jednak zapisać na nowej gałęzi korzystając z ich **hash** do póki są widoczne w logach konsoli.
-W trybie odłączonej głowy nadal możemy tworzyć commity, należy wówczas przenieść się na wybrany commit `git checkout <hash_commit` i przypiąć go do jakiegoś brancha np. `git switch -c <branch_name` lub lub wykonać `merge` do istniejącej gałęzi.
+W trybie odłączonej głowy nadal możemy tworzyć commity, należy wówczas przenieść się na wybrany commit `git checkout <hash_commit` i przypiąć go do jakiegoś brancha np. `git checkout <branch_name` lub wykonać `merge` do istniejącej gałęzi.
 
 Miejsce wskaźnika możemy sprawdzić za pomocą `git branch`.
 

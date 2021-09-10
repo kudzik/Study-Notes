@@ -191,6 +191,10 @@ Z poziomu github możemy tworzyć własne `release` które będą szczegółowo 
 
 Zebrane informacje na temat projektu, współpraca dotycząca dokumentacji.
 
+## GIST
+
+## Github Pages
+
 ## Podstawowe polecenia
 
 `git clone` - wykonuje pełną kopię zdalnego repozytorium do lokalnego folderu.
