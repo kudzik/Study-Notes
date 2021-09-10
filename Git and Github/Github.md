@@ -11,6 +11,10 @@
 - wspólna praca z problemami w kodzie
 - CI/CD
 
+CI - Continues Integration
+
+CD - Continues Delivery
+
 ## Połączenie za pomocą ssh
 
 Klucze znajdują się w katalogu użytkownika w folderze `.ssh`. Jeśli katalog jest pusty lub nie istnieje konieczne jest ich wygenerowanie.
@@ -147,6 +151,46 @@ W ustawieniach możemy wybrać szablony/templates dla `issues`.
 ## Kamienie milowe/Milestones
 
 Pozwalają śledzić czy udało nam się dotrzeć do określonego założenia które miało znaleźć się w projekcie. Zazwyczaj odbywa się to za pomocą `issue`. Kamienie milowe zazwyczaj zawierają termin wykonania, jego procent, listę otwartych zagadnień i żądań ściągnięcia.
+
+`Issues` przypisujemy do kamieni milowych, gdy je zamykamy zwiększa się procent wykonania danego kamienia milowego.
+
+## TAGI
+
+Commity do migawki w czasie umieszczone na gałęziach w projekcie. Do danych commitów które mają istotne znaczenie możemy przypisać `TAG` który nas poinformuje np. o numerze wersji naszej aplikacji.
+
+Tagi możemy podzielić na dwa rodzaje
+
+- Lekkie/Lightweight
+- Z adnotacjamiAnnotated
+  - Wiadomości/Message
+  - Suma kontrolna/Checksum
+
+Przy tagach pojawiają się spakowane paczki z kodem oraz informacje o wcześniejszych commit.
+
+```bash
+# sprawdzenie istniejących tagów
+git tag
+
+# dodanie TAG do wybranego commit (lekki)
+git tag <tag_name> <commit>
+
+# dodanie tagu na commit na gałęzi w której obecnie znajduję się znacznik HEAD (lekki)
+git tag <tag_name> <branch>
+
+# dodanie tagu z adnotacją
+## git tag -a "v1.0" e0f4b1e9
+git tag -a "Message" <commit>
+
+# wypchnięcie tagów do zdalnego repozytorium
+git push --tags
+```
+
+Z poziomu github możemy tworzyć własne `release` które będą szczegółowo opisane.
+
+## WIKI
+
+Zebrane informacje na temat projektu, współpraca dotycząca dokumentacji.
+
 ## Podstawowe polecenia
 
 `git clone` - wykonuje pełną kopię zdalnego repozytorium do lokalnego folderu.
