@@ -18,13 +18,13 @@ git help
 
 ## Czym jest GIT
 
-> Git jest systemem kontroli wersji *VCS* - Version Control System, rejestruje wprowadzone zmiany w pliku lub w plikach w czasie.
+Git jest systemem kontroli wersji *VCS*  (Version Control System), umożliwia śledzenie wprowadzonych zmian w plikach w czasie.
 
 Umożliwia:
 
 * Cofanie zmian w pliku lub całego projektu.
 * Umożliwia podgląd zmian które zostały wprowadzone na przestrzeni czasu.
-* Umożliwia podgląd kto wprowadził zmiany.
+* Umożliwia współpracę i podgląd kto wprowadził zmiany.
 * Umożliwia podgląd powodu wprowadzonej zmiany.
 * Może być wykorzystany dla dowolnego typu pliku, nie tylko dla kodu źródłowego.
 
@@ -136,6 +136,54 @@ Import-Module git-aliases -DisableNameChecking
 
 ## Podstawy
 
+> Inicjalizacja repozytorium w katalogu roboczym
+
+### Inicjalizacja nowego repozytorium GIT
+
+```bash
+git init
+
+# tworzenie pustego repozytorium bez folderu roboczego
+git init --bare
+```
+
+> Dodanie plików które chcemy śledzić
+
+```bash
+# Dodanie wszystkich plików
+git add .
+
+# Dodanie jednego pliku
+git add <file_name>
+```
+
+Od teraz Git śledzi dodane pliki po edycji należy kolejny raz dodać zmiany dodać je do `staging area`
+
+```bash
+git add .
+# lub
+git add <file_name>
+```
+
+> Zatwierdzenie zmian i dodanie zatwierdzenia do repozytorium (`git commit`)
+
+```bash
+git commit -m "Messaage"
+
+# Outomatyczne dodanie zmian do staging podczas commitu
+git commit -am "Message"
+```
+
+Zwykle przepływ pracy odbywa się ze strony lewej do prawej
+`working directory` -> `index` -> `repository`
+
+Jeśli chcemy zmienić kierunek przepływu możemy wykorzystać polecenie `git checkout`.
+
+Pozwala ono na:
+
+* Zmianę położenia wskaźnika `HEAD` na inna gałąź (pośrednio będzie wskazywało na wybrany commit na tej gałęzi)
+* Pobierze dane z tego zatwierdzenia i przywróci (skopiuje) z niego pliki do katalogu roboczego i indeksu (pliki we wszystkich obszarach są identyczne i zgodne z commitem na który wskazuje `HEAD`).
+
 ### Stany plików
 
 > Working Area
@@ -181,23 +229,7 @@ Repozytoria
 * Lokalne (Local)
 * Zdalne (Origin)
 
-## Przepływ prac*
 
-* Inicjalizacja repozytorium w katalogu roboczym
-* Dodanie plików które chcemy śledzić
-* Zmiany w pliku znajdującego się w katalogu roboczym
-* Dodanie zmian do indeksu (`git add <file_name>)`
-* Zatwierdzenie zmian i dodanie zatwierdzenia do repozytorium (`git commit`)
-
-Zwykle przepływ pracy odbywa się ze strony lewej do prawej
-`working directory` -> `index` -> `repository`
-
-Jeśli chcemy zmienić kierunek przepływu możemy wykorzystać polecenie `git checkout`.
-
-Pozwala ono na:
-
-* Zmianę położenia wskaźnika `HEAD` na inna gałąź (pośrednio będzie wskazywało na wybrany commit na tej gałęzi)
-* Pobierze dane z tego zatwierdzenia i przywróci (skopiuje) z niego pliki do katalogu roboczego i indeksu (pliki we wszystkich obszarach są identyczne i zgodne z commitem na który wskazuje `HEAD`).
 
 ### Detached HEAD
 
@@ -319,22 +351,6 @@ pwd
 
 ## Praca z GIT Command Line
 
----
-> Inicjalizacja nowego repozytorium GIT
-
-```bash
-git init
-
-# tworzenie pustego repozytorium bez folderu roboczego
-git init --bare
-```
-
-> Dodanie wszystkich plików do śledzenia
-
-```bash
-git add .
-```
-
 > Zatwierdzenie zmian z komentarzem
 
 ```bash
@@ -411,10 +427,32 @@ git log --stat
 git log --stat -p
 ```
 
-> Przeglądanie i odzyskiwanie referencji ze zmian
+> Wyświetla pliki w katalogu
+W zależności od przełącznika wyświetla wybrane pliki w katalogu
+[git ls-files](https://git-scm.com/docs/git-ls-files)
+
+```bash
+# Wszystkie śledzone pliki
+git ls-files
+
+```
+
+
+## Odzyskiwanie utraconych zmian
 
 Reflog pozwala na dokładne przeglądanie historii (po których elementach poruszał się znacznik `HEAD`). możemy z niego odzyskać dane np. hash zmian które zostały wprowadzone poprzez wykorzystanie interaktywnego rebase. Dane są widoczne do momentu zebrania ich przez **garbage collector**.
 Reflog zawiera dane lokalne.
+
+możemy również odzyskać dane poprzez
+
+```bash
+git reflog
+git checkout <hash>
+git switch -c <new_branch_name>
+git checkout main
+git merge <branch>
+git branch -d <branch>
+```
 
 ```bash
 git reflog
@@ -468,19 +506,47 @@ git commit -m "Message"
 git commit -am "Message"
 ```
 
-> Wycofanie wprowadzonych zmian
+## Wycofanie wprowadzonych zmian
+
+Przy zastosowaniu polecenia `git checkout <hash_commit>` przechodzimy w tryb `detached HEAD` (tryb odłączonej głowy 😄). Pozwala to przeglądać i eksperymentować bez zapisywania zmian. Jeśli jednak zdecydujemy się na ich zapisanie możemy użyć komendy `git checkout -b <branch_name>`.
+
+### Zmiany które nie zostały dodane do staged
 
 Istnieją różne sposoby przywracania projektu jak również pojedynczego pliku.
 
 > `git checkout` - służy do przywracania projektu lub pliku do wcześniejszego stanu.
 
-Przesuwa wskaźnik `HEAD` na wskazany commit.
+```bash
+# przywraca wybrany plik jeśli nie był dodany do staging (tylko zmodyfikowany)
+git checkout <file_name>
+# przywraca wszystkie pliki jeśli nie były dodane do staging (tylko zmodyfikowany)
+git checkout .
+```
 
-W katalogu zostaną wczytane pliki z określonego commit.
+`checkout` przesuwa wskaźnik `HEAD` na wskazany commit. W katalogu zostaną wczytane pliki z określonego commitu.
 
-Jeśli zdecydujemy się na użycie go na pliku zostanie wczytana jego wersja z podanego commit.
+Możemy użyć również `git restore`
 
-Przy zastosowaniu polecenia `git checkout <hash_commit>` przechodzimy w tryb `detached HEAD` (tryb odłączonej głowy 😄). Pozwala to przeglądać i eksperymentować bez zapisywania zmian. Jeśli jednak zdecydujemy się na ich zapisanie możemy użyć komendy `git checkout -b <branch_name>`.
+```bash
+# przywraca wybrany plik jeśli nie był dodany do staging (tylko zmodyfikowany)
+git restore <file_name>
+# przywraca wszystkie pliki jeśli nie były dodane do staging (tylko zmodyfikowany)
+git restore .
+```
+
+### Zmiany które zostały dodane do staged
+
+Gdy dodamy pliki do `stage` za pomocą `git add <file_name>` możemy wycofać ten stage za pomocą `git restore --stage` a następnie tak jak w przypadku pliku który był tylko zmodyfikowany przywrócić jego stan z ostatniej migawki za pomocą `git restore <file_name>`
+
+```bash
+git restore --stage <file_name>
+git restore <file_name>
+```
+
+Możemy również użyć `git reset` w sytuacji gdy wprowadziliśmy już zmiany do indeksu za pomocą `git add` i chcemy je wycofać.
+Jesteśmy przenoszeni do zatwierdzenia na które wskazuje znacznik `HEAD` a on wskazuje na ostatni wykonany commit w tej sytuacji gałąź tak naprawdę nie jest przesuwana ponieważ wskaźnik cały czas się tam znajduje.
+
+Możemy również przywrócić pojedynczy plik z ostatniego commit `git reset <file_name`.
 
 ``` bash
 # Przywrócenie wybranego commit
@@ -495,6 +561,10 @@ git checkout master
 # nowsza wersja
 git switch master
 ```
+
+### Zmiany które zostały dodane do repozytorium
+
+Zmiany które zostały zatwierdzone przez `commit`
 
 > `git reset`
 
@@ -516,13 +586,7 @@ git reset --mixed
 
 # skopiuje zmiany z repozytorium do wszystkich pozostałych obszarów (working area, index)
 git reset --hard
-
-# wybrany plik
-git checkout <file_name>
 ```
-
-`git reset` możemy również użyć w sytuacji gdy wprowadziliśmy już zmiany do indeksu za pomocą `git add` i chcemy je wycofać.
-Jesteśmy przenoszeni do zatwierdzenia na które wskazuje znacznik `HEAD` a on wskazuje na ostatni wykonany commit w tej sytuacji gałąź tak naprawdę nie jest przesuwana ponieważ wskaźnik cały czas się tam znajduje.
 
 Jeżeli nie zastosujemy żadnej opcji domyślnie będzie zastosowany `--mixed` i zmiany z repozytorium (z bieżącego commit) znajdą się tylko w obszarze index (plik będzie miał status `modified`).
 
@@ -710,7 +774,7 @@ git mv <old_file_name> <new_file_name>
 
 > Usunięcie pliku
 
-Jeśli dodamy lik do indeksu, ale nie wykonamy commit (plik znajduje się w obszarze roboczym i indeksie), git podczas próby usunięcia wyświetli błąd, zapobiega to przypadkowemu usunięciu plików których jeszcze nie ma w repozytorium.
+Jeśli dodamy plik do indeksu, ale nie wykonamy commit (plik znajduje się w obszarze roboczym i indeksie), git podczas próby usunięcia wyświetli błąd, zapobiega to przypadkowemu usunięciu plików których jeszcze nie ma w repozytorium.
 
 W takim przypadku możemy zdecydować się na usunięcie pliku
 
@@ -718,6 +782,8 @@ W takim przypadku możemy zdecydować się na usunięcie pliku
 * Z indeksu i obszaru roboczego `git rm -f`
 
 Gdy usuniemy plik z indeksu możemy go również usunąć z projektu, git się nim już nie interesuje.
+
+Jeśli usuniemy plik systemowo git zobaczy że go nie ma przy sprawdzaniu `git status` i zaoferuje opcje przywrócenia, usunięcia lub dodania zmian do staging area.
 
 > Przed dodaniem pliku do repozytorium (nie był wykonany commit)
 
@@ -727,6 +793,11 @@ git rm --cached
 
 # Usuwa plik z indeksu oraz katalogu roboczego
 git rm -f
+
+# pokazuje które nieśledzone pliki zostaną usunięte z katalogu roboczego
+git clean -dn
+# usuwa plik nieśledzone z katalogu roboczego
+git clean -df
 ```
 
 > Usunięcie gałęzi lokalne
@@ -735,7 +806,7 @@ git rm -f
 # Usunięcie gałęzi lokalnie
 git branch -d <branch_name>
 
-# usunięcie gałęzi która ma zatwierdzenia ale nie została scalona z inną gałęzią
+# usunięcie gałęzi która ma zatwierdzenia i nie została scalona z inną gałęzią
 git branch -D <branch_name>
 
 # Usunięcie gałęzi na zdalnym repozytorium
@@ -782,11 +853,16 @@ git diff HEAD HEAD~2
 
 > Scalanie zmian z innej gałęzi/ **Merge**
 
+Jeśli podczas rozwoju gałęzi np. feature główna gałąź nie została zmieniona i nie ma konfliktów zastosowany zostanie `fast forward`.
+
+
+
 ```bash
 # Przełączamy się na branch do którego chcemy dodać zmiany przeważnie main
 git checkout main
 git merge <branch_name>
 ```
+
 
 ## Rozwiązywanie konfliktów
 
@@ -839,9 +915,8 @@ git config --global core.editor "code --wait"
 
 ## Do Sprawdzenia
 
-Gdy dodamy zmodyfikujemy plik bez dodania do staged `git add` możemy wycofać zmiany `git restore <plik>`
 
-Gdy dodamy pliki do `stage` za pomocą `git add <plik>` możemy wycofać ten stage za pomocą `git restore --stage` a następnie przywrócić ich stan z ostatniej migawki za pomocą `git restore <plik>`
+
 
 Przy korzystaniu z WSL i personal token na github konieczne podlinkowanie credential managera z windowsa do debiana
 
