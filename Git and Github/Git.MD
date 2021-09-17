@@ -358,6 +358,8 @@ git add File
 
 ### Podgląd historii rewizji
 
+[Podgląd historii](https://git-scm.com/book/pl/v2/Podstawy-Gita-Podgl%C4%85d-historii-rewizji)
+
 Domyślnie, polecenie git log uruchomione bez argumentów, listuje zmiany zatwierdzone w tym repozytorium w odwrotnej kolejności chronologicznej, czyli pokazując najnowsze zmiany w pierwszej kolejności.
 
 ```bash
@@ -398,11 +400,19 @@ git log --stat
 # zmiany wraz ze ze zmodyfikowanymi wartościami w plikach
 ## glgp
 git log --stat -p
+
+# zmiany wraz ze ze zmodyfikowanymi wartościami w plikach w dwóch ostatnich rewizjach
+git log -p -2
 ```
+
+:bulb: Istnieje możliwośc tworzenai spersonalizowanych widoków dzięki opcji `format`
+
 
 
 ---------------
+
 REFACTOR
+
 ---------------
 
 Zwykle przepływ pracy odbywa się ze strony lewej do prawej
@@ -412,9 +422,8 @@ Jeśli chcemy zmienić kierunek przepływu możemy wykorzystać polecenie `git c
 
 Pozwala ono na:
 
-* Zmianę położenia wskaźnika `HEAD` na inna gałąź (pośrednio będzie wskazywało na wybrany commit na tej gałęzi)
-* Pobierze dane z tego zatwierdzenia i przywróci (skopiuje) z niego pliki do katalogu roboczego i indeksu (pliki we wszystkich obszarach są identyczne i zgodne z commitem na który wskazuje `HEAD`).
-
+- Zmianę położenia wskaźnika `HEAD` na inna gałąź (pośrednio będzie wskazywało na wybrany commit na tej gałęzi)
+- Pobierze dane z tego zatwierdzenia i przywróci (skopiuje) z niego pliki do katalogu roboczego i indeksu (pliki we wszystkich obszarach są identyczne i zgodne z commitem na który wskazuje `HEAD`).
 
 > Stash
 Schowek w którym możemy umieszczać plik które nie są dodane jeszcze do indeksu
@@ -426,14 +435,12 @@ Gałęzie są referencjami do określonych zatwierdzeń (commit). Zatwierdzenie 
 
 Wskaźnik `HEAD` jest tylko jeden, zwykle wskazuje na bieżącą gałąź ze znajdującym się na niej zatwierdzeniem
 
-
-
 Główna gałąź to `Main` (dawniej Master)
 
 Repozytoria
 
-* Lokalne (Local)
-* Zdalne (Origin)
+- Lokalne (Local)
+- Zdalne (Origin)
 
 ### Detached HEAD
 
@@ -448,8 +455,8 @@ Miejsce wskaźnika możemy sprawdzić za pomocą `git branch`.
 
 > :exclamation: Nie należy używać `rebase` na gałęziach publicznych
 
-* Oczyszczanie historii gałęzi przed jej wysłaniem
-* Pobranie zmian z jednej do drugiej gałęzi bez `merge`
+- Oczyszczanie historii gałęzi przed jej wysłaniem
+- Pobranie zmian z jednej do drugiej gałęzi bez `merge`
 
 ### Zmiany historii lokalnej przed wysłaniem zmian do zdalnego repozytorium
 
@@ -489,9 +496,9 @@ Innym sposobem łączenia jest `rebase`.
 
 :exclamation: Historia jest zachowana na jednej lini czasowej ale nie odzwierciedla dokładnie tego co się działo w projekcie
 
-* `git switch main` Aktualizujemy main `git pull --rebase` (przy korzystaniu z repozytorium zdalnego)
-* Zamieniamy branch `git switch feature` a następnie `git rebase main`
-* Zmieniamy gałąź na main `git switch main` i scalamy `git merge feature`
+- `git switch main` Aktualizujemy main `git pull --rebase` (przy korzystaniu z repozytorium zdalnego)
+- Zamieniamy branch `git switch feature` a następnie `git rebase main`
+- Zmieniamy gałąź na main `git switch main` i scalamy `git merge feature`
 
 ### Cherry Pick
 
@@ -510,8 +517,8 @@ Tagi to rodzaj zakładki przy pomocy których możemy oznaczać ważne commity. 
 
 Tagi dzielimy na dwie kategorie
 
-* lekkie (bez adnotacji)
-* z adnotacją (tworzą w strukturze dodatkowe miejsce na zapisanie dodatkowych danych)
+- lekkie (bez adnotacji)
+- z adnotacją (tworzą w strukturze dodatkowe miejsce na zapisanie dodatkowych danych)
 
 Flaga `a` dodaje dodatkowe adnotacje np. o autorze
 
@@ -573,8 +580,6 @@ git push -u origin main
 
 ## Podstawowe komendy
 
-
-
 > Wyświetla pliki w katalogu
 W zależności od przełącznika wyświetla wybrane pliki w katalogu
 [git ls-files](https://git-scm.com/docs/git-ls-files)
@@ -622,12 +627,11 @@ Pliki mogą być zmodyfikowane w różnych miejscach
 
 Oznaczenia liter
 
-* Nowe nieśledzone pliki mają obok siebie `??`
-* Nowe pliki dodane do poczekalni `A`
-* Zmodyfikowane pliki `M`
+- Nowe nieśledzone pliki mają obok siebie `??`
+- Nowe pliki dodane do poczekalni `A`
+- Zmodyfikowane pliki `M`
 
 Lewa strona wskazuje na to czy plik jest w poczekalni, a prawa czy jest zmieniony.
-
 
 ## Wycofanie wprowadzonych zmian
 
@@ -891,8 +895,6 @@ git branch -D <branch_name>
 git push -d <remote_name> <branch_name>
 ```
 
-
-
 > Scalanie zmian z innej gałęzi/ **Merge**
 
 Jeśli podczas rozwoju gałęzi np. feature główna gałąź nie została zmieniona i nie ma konfliktów zastosowany zostanie `fast forward`.
@@ -919,14 +921,13 @@ git commit -m "commit_message"
 git rebase --continue
 ```
 
-
 ## Narzędzia
 
 ## Praca z GIT
 
 ### Podstawkowe zasady
 
-* Podczas wprowadzania nowej funkcjonalności tworzymy nowy `branch`
+- Podczas wprowadzania nowej funkcjonalności tworzymy nowy `branch`
 
 ## Do Sprawdzenia
 
