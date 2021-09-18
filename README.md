@@ -29,4 +29,4 @@
 - [x] 20210822_NET Class Libraries The Big Picture
 - [x] 20210918_CSharp Getting Started
 - [x] 20210918_Controlling Program Flow in CSharp
-- [ ] 
+- [ ] 20210918_Introduction to the CSharp Type System

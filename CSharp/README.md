@@ -2,8 +2,6 @@
 
 ## Podstawy
 
-
-
 - [Wyjątki](./Przewodnik/Podstawy/Wyjątki.md)
 
 ## Przewodnik
