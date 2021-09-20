@@ -25,4 +25,37 @@ Jeśli typ możemy wywnioskować z kontekstu zamiast jawnie go podawać możemy 
 
 ## Tworzenie i używanie string
 
-Typ `string` to tak naprawdę tablica znaków o typie `char`. Tekst zawarty w zmiennej typu string zawsze otoczony jest `""`. Jest to typ referencyjny ale zachowuję się podobnie do typu wartościowego. Jest niezmienny więc aby go zmodyfikować musimy ponownie przypisać go do zmiennej.
+Typ `string` to tak naprawdę tablica znaków o typie `char`. Tekst zawarty w zmiennej typu string zawsze otoczony jest `""`. Jest to typ referencyjny ale zachowuję się podobnie do typu wartościowego. Jest niezmienny więc podczas modyfikacji tworzona i przypisywana nowa wartość.
+
+Zmienna typu `string` nie przechowuje wartości tylko **referencje** (adres pamięci w którym znajduje się wartość). Przy przypisaniu wartości do innej zmiennej i jego modyfikacji oryginalny ciąg pozostaje bez zmian.
+
+:bulb: Typy referencyjne przechowywane są na **stercie** a typy wartościowe na **stosie**.
+
+Podczas pracy na string, gdy wartości są często modyfikowane i kopiowane powinniśmy skorzystać z klasy `System.Text.StringBuilder`.
+
+Łączenie string
+
+```Csharp
+int year = 2021;
+string s1 = "Hello";
+string s2 = "World";
+string s3 = s1 + s2;
+string s4 = string.Concat(s1, s2);
+string s5 = "Hello" + year + "World";
+
+// Interpolacja
+string hi = $"Hello {s2}";
+
+```
+
+## Metody
+
+Parametry do metody mogą być przekazywane przez **wartość** lub przez **referencje**.
+
+- Przez wartość
+
+Metoda otrzymuje tylko kopię i nie pracuje na oryginalnych wartościach. Pop wykonaniu działań nie zmieni nic w przekazanych parametrach.
+
+- Przez referencje
+
+Do metody przekazywane są referencje (adresy do wartości), więc jeśli wykonamy jakieś operacje to oryginalne wartości zostaną zmienione
