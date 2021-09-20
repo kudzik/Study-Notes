@@ -2,14 +2,9 @@
 
 [GIT](/Git/README.MD)
 
-[CSharp]()
-
-[LINQ]()
-
 ## Lista Kursów
 
 ### GIT
-
 
 - [x] 20210830_Git The Big Picture
 - [x] 20210901_Getting Started with Git
