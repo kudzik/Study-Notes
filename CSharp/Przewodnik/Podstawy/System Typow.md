@@ -58,4 +58,62 @@ Metoda otrzymuje tylko kopię i nie pracuje na oryginalnych wartościach. Pop wy
 
 - Przez referencje
 
-Do metody przekazywane są referencje (adresy do wartości), więc jeśli wykonamy jakieś operacje to oryginalne wartości zostaną zmienione
+Do metody przekazywane są referencje (adresy do wartości), więc jeśli wykonamy jakieś operacje to oryginalne wartości zostaną zmienione. Aby przekazać referencję używamy słowa `ref` lub `out`.
+
+:bulb: Do przekazywanego parametru `ref` musi być przypisana wartość, parametr `out` wystarczy że będzie zainicjalizowany. `out` może zostać również wykorzystany do zwrócenia wielu wartości z metody.
+
+### Argumenty nazwane i parametry opcjonalne
+
+Parametry opcjonalne podajemy jako ostatnie.
+
+```CSharp
+// Parametry nazwane
+Add(a: 3, b:8);
+
+public int Add(int a, int b, int c = 0)
+```
+
+### Expressions syntax body
+
+```CSharp
+ private static int Add(int v1, int v2, int v3) => v1 + v2 + v3;
+```
+
+## Przestrzenie nazw i biblioteki klas bazowych BCL
+
+W Visual studio narzędzie które pozwala przeglądać typy w przestrzeniach nazw `Object Browser` (CTRL+ALT+J)
+
+
+## Klasy
+
+Klasa to reprezentacja obiektu występującego w świecie rzeczywistym. Jest szablonem który możemy wykorzystać do tworzenia instancji obiektu.
+
+Klasa `Osoba` która zawiera składowe np. `Imię` i `Nazwisko` to szablon, na jej podstawie możemy tworzyć konkretne egzemplarze, które mają nadane imię i nazwisko.
+
+```Csharp
+// Klasa szablon
+ class Person
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+
+// Tworzenie instancji na podstawie klasy
+Person Tom = new Person() { FirstName = "Tom", LastName = "Smith" };
+Person Bruce = new Person() { FirstName = "Bruce", LastName = "Lee" };
+```
+
+Klasa zawiera składowe które reprezentują cechy odwzorowanego obiektu oraz metody charakteryzujące zachowania, ogólnie można przyjąć że właściwości to przymiotniki a metody zawarte w klasie to rzeczowniki.
+
+Składowe klasy:
+
+- Pola / Fields
+- Metody / Methods
+- Właściwości / Properties
+- Zdarzenia / Events
+
+:bulb: Klasy są typami referencyjnymi które są przechowywane na stercie.
+
+### Konstruktor
+
+Podczas tworzenia obiektu pierwszy zostanie wykonany konstruktor, gdy nie zdefiniujemy własnego w klasie zostanie utworzony **konstruktor domyślny**. 
