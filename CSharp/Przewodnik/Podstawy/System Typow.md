@@ -177,7 +177,17 @@ Dziedziczenie, wraz z hermetyzację i polimorfizmem, jest jedną z trzech podsta
 
 Jeśli chcemy aby składowa klasy była widziana tylko dla klasy która z niej dziedziczy musimy ustawić dostęp na `protected`.
 
-W klasie pochodnej konstruktor z klasy bazowej wywołujemy za pomocą `:base`.
+W klasie pochodnej składowe z klasy bazowej wywołujemy za pomocą `:base` (np. metody, konstruktory).
+
+Dziedziczenie nie wymusza na nas implementacji składowych klasy bazowej, jeśli nie ma zaimplementowanej metody w klasie pochodnej kompilator uruchomi metodę z klasy bazowej, dobrą praktyką jest rzucenie wyjątku w klasie bazowej w metodzie która musi być zaimplementowana w klasie pochodnej. W klasie bazowej metoda która ma zostać przesłonięta oznaczamy słowem `virtual` a w klasie pochodnej metodę przesłanianą jako `override`.
+
+:bulb: Jeśli chcemy wymusić implementacje powinniśmy skorzystać z **interfejsów** lub klasy abstrakcyjnej.
+
+## Klasy i metody Abstrakcyjne
+
+Klasy abstrakcyjne to klasy na podstawie których **nie możemy** utworzyć instancji obiektu. Odnoszą się do rzeczywistych obiektów które są abstrakcyjne (np. nie możemy utworzyć wystąpienia klasy **figura geometryczna**).
+
+Składowe klasy abstrakcyjnej mogą posiadać implementacje lub nie. Jeśli składową oznaczymy jako abstrakcyjną nie podajemy jej implementacji tylko samą definicję, składowa ta będzie musiała zostać zaimplementowana w klasie pochodnej.
 
 ## Polimorfizm
 
@@ -199,11 +209,7 @@ Może to się przydać w różnych sytuacjach. Przykładowo możemy stworzyć ta
 - Statyczny
 - Dynamiczny
 
-## Klasy i metody Abstrakcyjne
 
-Klasy abstrakcyjne to klasy na podstawie których **nie możemy** utworzyć instancji obiektu. Odnoszą się do rzeczywistych obiektów które są abstrakcyjne (nie możemy utworzyć wystąpienia klasy **figura geometryczna**).
-
-Metoda abstrakcyjna musi zostać zaimplementowana w klasie dziedziczącej.
 
 ## Interfejsy
 
@@ -212,3 +218,4 @@ Interfejs to kontrakt, zawiera listę składowych bez implementacji które klasa
 Według konwencji nazwy interfejsów zaczynamy od dużej litery `I` np. `IEnumerable`.
 
 Interfejsy mogą korzystać z polimorfizmu, jeśli klasy implementują ten sam interfejs można stworzyć obiekt typu implementowanego interfejsu.
+
