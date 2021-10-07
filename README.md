@@ -25,4 +25,8 @@
 - [x] 20210918_CSharp Getting Started
 - [x] 20210918_Controlling Program Flow in CSharp
 - [x] 20210918_Introduction to the CSharp Type System
-- [ ] 20210924_CSharp Interfaces
+- [x] 20210924_CSharp Interfaces
+
+### Docker and Kubernetes
+
+- [] 20211007_Docker and Kubernetes: The Big Picture

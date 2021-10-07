@@ -171,6 +171,8 @@ Składowe statyczne w klasie należą do samej klasy a nie do jej instancji, dan
 
 ## Dziedziczenie
 
+Wszystkie obiekty w C# dziedziczą domyślnie typ `Object`.
+
 Dziedziczenie, wraz z hermetyzację i polimorfizmem, jest jedną z trzech podstawowych cech programowania obiektowego. Dziedziczenie umożliwia tworzenie nowych klas, które ponownie, rozszerzają i modyfikują zachowanie zdefiniowane w innych klasach. Klasa, której składowe są dziedziczone, jest nazywana klasą bazową , a klasa dziedzicząca te składowe jest nazywana klasą pochodną. Klasa pochodna może mieć tylko jedną bezpośrednią klasę bazową.
 
 :bulb: Klasa pochodna rozszerza działanie klasy z której dziedziczy, dziedziczenie może zachodzić jeśli spełnimy warunek `jest` (np. **Manager** jest **pracownikiem**)
@@ -188,6 +190,26 @@ Dziedziczenie nie wymusza na nas implementacji składowych klasy bazowej, jeśli
 Klasy abstrakcyjne to klasy na podstawie których **nie możemy** utworzyć instancji obiektu. Odnoszą się do rzeczywistych obiektów które są abstrakcyjne (np. nie możemy utworzyć wystąpienia klasy **figura geometryczna**).
 
 Składowe klasy abstrakcyjnej mogą posiadać implementacje lub nie. Jeśli składową oznaczymy jako abstrakcyjną nie podajemy jej implementacji tylko samą definicję, składowa ta będzie musiała zostać zaimplementowana w klasie pochodnej.
+
+## Interfejsy
+
+Interfejs to kontrakt, zawiera listę składowych bez implementacji (wyjątek od C# ) które klasa implementująca interfejs musi zaimplementować. Interfejsy podobnie jak klasy abstrakcyjne nie pozwalają na utworzenie ich instancji. Zapewniają większą elastyczność kodu i odporność na zmiany, izolują nasz kod od szczegółów implementacji.
+
+Według konwencji nazwy interfejsów zaczynamy od dużej litery `I` np. `IEnumerable`. Klasa może implementować wiele interfejsów.
+
+Każdy z członków interfejsu jest domyślnie publiczny, jeśli chcemy to zmienić musimy posłużyć się jawną deklaracją metody dostępu.
+
+Właściwości automatyczne w interfejsie to tak naprawdę tylko definicja która musi być zaimplementowana w klasach implementujących ten interfejs.
+
+Interfejsy mogą korzystać z polimorfizmu, jeśli klasy implementują ten sam interfejs można stworzyć obiekt typu implementowanego interfejsu.
+
+:bulb: Główna różnica pomiędzy klasami abstrakcyjnymi a interfejsami polega na tym, że jeśli implementujemy interfejs musimy dostarczyć wszystkie zawarte w nim definicje, w klasie bazowej tylko te które oznaczymy jako abstrakcyjne.
+
+Jeśli implementujemy wiele interfejsów które mają takie same nazwy metod musimy użyć jawnej implementacji.
+
+Jeśli z jakiegoś powodu zmuszeni jesteśmy do zmian w interfejsie możemy zastosować **dziedziczenie interfejsu** lub **domyślną implementację**.
+
+
 
 ## Polimorfizm
 
@@ -208,14 +230,3 @@ Może to się przydać w różnych sytuacjach. Przykładowo możemy stworzyć ta
 
 - Statyczny
 - Dynamiczny
-
-
-
-## Interfejsy
-
-Interfejs to kontrakt, zawiera listę składowych bez implementacji które klasa implementująca interfejs musi zaimplementować. Interfejsy podobnie jak klasy abstrakcyjne nie pozwalają na utworzenie ich instancji.
-
-Według konwencji nazwy interfejsów zaczynamy od dużej litery `I` np. `IEnumerable`.
-
-Interfejsy mogą korzystać z polimorfizmu, jeśli klasy implementują ten sam interfejs można stworzyć obiekt typu implementowanego interfejsu.
-

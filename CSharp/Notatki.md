@@ -14,3 +14,27 @@
 | nie możemy przypisać wartości null                                                                                                                                                                       | wartość null może zostać przypisana                                                                                                                                                                                            |
 [Source]("https://www.plukasiewicz.net/Artykuly/Var_vs_dynamic")
 
+## Serializacja i deserializacja obiektów
+
+### JSON
+
+Nazwy obiektów JSON zawierają małe litery, aby dostosować ich wielkość do obiektów C# możemy zastosować opcje
+
+```csharp
+JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive=true};
+
+// Deserializacja, zmiana odpowiedzi w JSON na obiekty C#
+JsonSerializer.Deserialize<IEnumerable<Person>>(response, options);
+```
+
+## Konfiguracja bez ponownego kompilowania
+
+[MS Docs](https://docs.microsoft.com/pl-pl/troubleshoot/dotnet/csharp/store-custom-information-config-file)
+
+W Visual Studio możemy dodać plik konfiguracyjny z którego konfiguracja będzie wczytywana podczas uruchamiania programu, nie musimy ponownie kompilować kodu.
+Realizowane jest to za pomocą wstrzykiwania zależności i interfejsu `IConfiguration` oraz wczytania zamiennej zawartej w pliku.
+
+W aplikacjach konsolowych konieczne jest dodanie zestawu Nuget `System.Configuration.ConfigurationManager`.
+
+Plik konfiguracji zostanie wyeksportowany do katalogu `bin`, plik możemy edytować zmiany w pliku zostaną odzwierciedlone w aplikacji bez ponownej kompilacji.
+
