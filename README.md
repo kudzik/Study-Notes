@@ -27,6 +27,11 @@
 - [x] 20210918_Introduction to the CSharp Type System
 - [x] 20210924_CSharp Interfaces
 
-### Docker and Kubernetes
+### Docker
 
-- [] 20211007_Docker and Kubernetes: The Big Picture
+- [x] 20211007_Docker and Kubernetes: The Big Picture
+- [x] 20211010_Getting Started with Docker
+
+### Kubernetes
+
+- [x] 20211010_Getting Started with Kubernetes
