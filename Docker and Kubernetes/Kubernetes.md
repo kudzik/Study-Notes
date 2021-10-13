@@ -2,7 +2,7 @@
 
 ## Linki
 
-[https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/](API Docs)
+[API Docs](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/)
 
 Został stworzony przez Google w 2015 roku. Jest następcą projektów Borg i Omega. Skrócona nazwa to K8S.
 
