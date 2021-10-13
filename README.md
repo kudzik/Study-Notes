@@ -35,3 +35,7 @@
 ### Kubernetes
 
 - [x] 20211010_Getting Started with Kubernetes
+
+### Linux
+
+- [ ] 20211013_Getting Started with Linux

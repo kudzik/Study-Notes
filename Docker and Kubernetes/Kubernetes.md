@@ -66,6 +66,17 @@ spec:
 
 [IP serwisu](../Docker%20and%20Kubernetes/img/Kubernetes_service_IP.jpg)
 
+:exclamation: Port `nodePort` musi być z zakresu 30000-32767
+
+> Utworzenie serwisu na podstawie pliku
+
+```bash
+kubectl apply -f svc-nodeport.yml
+
+# Informacje o serwisie
+kubectl describe svc ps-nodeport
+```
+
 ## Pods
 
 Pod (kapsułka) jest główną jednostką skalowania. Skalujemy zawsze dodając nowe kapsułki, nie dodajemy nowych kontenerów do kapsułek.
@@ -95,6 +106,8 @@ kubectl apply -f pod.yml
 # Pobranie informacji
 kubectl get pods
 kubectl get pods --watch
+# Informacje o etykiecie
+kubectl get pods --show-labels
 # Dodatkowe informacje
 kubectl get pods -o wide
 # Informacje o określonym pod
