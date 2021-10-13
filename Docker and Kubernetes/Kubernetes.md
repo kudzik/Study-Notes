@@ -14,14 +14,57 @@ Kubernetes jest koordynatorem mikrousług.
 
 Kubernetes można porównać do **trenera** drużyny piłkarskiej, dba o rozstawienie zawodników zgodnie z ich umiejętnościami, pilnuje by wszyscy trzymali się planu a także wymienia zawodników na innych gdy przydarzy się kontuzja. Jest również w stanie podejmować decyzje na bieżąca w zależności od zaistniałej sytuacji.
 
+:bulb: W kubernetes serwisy możemy kreować na dwa sposoby imperatywny oraz **deklaratywny**, ten drugi jest sposobem preferowanym.
+
+Tryb **imperatywny** to tryb w którym możemy konfigurować kubernetes poprzez `kubectl` wydając odpowiednie polecenia, **deklaratywny** opiera się na przygotowaniu plików `yml` z konfiguracją.
+
+
 ## Masters
 
+**Klastry**
 Przeważnie stosuje się 3 węzły master, powinny być na różnych maszynach. Liczba powinna być zawsze nieparzysta, chroni to przed problemami takimi jak **Split Brain** i **Deadlock**.
 Tylko jeden węzeł master może wprowadzać zmiany i jest on nazywany **liderem**, pozostałe to węzły **Follower**. Jeśli lider ulegnie awarii wybierany jest nowy spośród działających followers.
 
 Na hostingach od dostawców nie mamy dostępu do Masterów, są ukryte i zarządzane przez dostawcę, otrzymujemy tylko punkty końcowe API endpoint.
 
 ## Node (węzły robocze)
+
+## Serwisy
+
+> Dodanie serwisu typu NodePort w sposób imperatywny
+
+Tworzy serwis z otwartą komunikacją do poda pracującego na porcie 8080, port dostępowy z zewnątrz znajduje się w informacjach o serwisie.
+
+```bash
+kubectl expose pod hello-pod --name=hello-svc --target-port=8080 --type=NodePort
+```
+
+> Usunięcie serwisu
+
+```bash
+kubectl get services # services możemy zastąpić aliasem svc
+kubectl delete svc hello-svc
+```
+
+> Dodanie serwisu s sposób deklaratywny
+
+```yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ps-nodeport
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+    nodePort: 31111
+    protocol: TCP
+  selector:
+    app: web
+```
+
+[IP serwisu]("img/Kubernetes_service_IP.jpg")
 
 ## Pods
 
@@ -40,6 +83,33 @@ Kapsułka zawsze jest przypisana do jednego węzła (node).
 Kapsułki posiadają cykl życia, gdy ulegają awarii powoływane są nowe, każda nowa kapsułka otrzymuje nowy adres IP. Dlatego poszczególne kapsułki komunikują się ze sabą poprzez `SVC` który pełni jednocześnie funkcję **load balancer**.
 
 **SVC** może odwoływać się poprzez etykiety dodane do kapsułek. Etykiet może być kilka. Możemy w ten sposób wdrażać np. aktualizacje kroczące.
+
+Ze względu na to że pody posiadają cykl życia nie łączymy się do nich bezpośrednio, ich adresy IP się zmieniają gdy nowe powoływane są do życia
+
+### Polecenia
+
+```bash
+# Tworzenie poda
+kubectl apply -f pod.yml
+
+# Pobranie informacji
+kubectl get pods
+kubectl get pods --watch
+# Dodatkowe informacje
+kubectl get pods -o wide
+# Informacje o określonym pod
+kubectl describe pods <podName>
+
+# Usuwanie namespace
+kubectl get all
+kubectl get all -n <Namespace>
+kubectl delete <name>
+
+# Usuwanie poda
+kubectl delete pod <podName>
+kubectl delete pod -f <fileName>
+
+```
 
 ## API
 
@@ -77,3 +147,23 @@ spec:
         - containerPort: 80
 ```
 
+Do komunikacji z serwerem API wykorzystujemy `kubectl` komunikacja przebiega poprzez protokół HTTP
+
+## Instalacja i konfiguracja
+
+
+## NOTATKI
+
+> Przekierowanie portu z poda
+:exclamation: Działa na localhost na serwerze już nie
+
+```bash
+kubectl port-forward pods/hello-pod 8080:8080 -n default
+```
+
+Udostępnienie portu w sposób imperatywny poprzez stworzenie serwisu który mo dostęp do poda
+Tworzy węzeł dostępu w klastrze
+
+```bash
+kubectl expose pod hello-pod --name=svc --target-port=8080 --type=NodePort
+```

@@ -10,8 +10,15 @@
         "glgg",
         "glgp",
         "glog",
+        "kube",
         "libexec",
+        "Loadbalancer",
+        "metallb",
+        "multus",
         "oneline",
+        "openebs",
+        "openfaas",
+        "portainer",
         "reflog"
     ]
 }
