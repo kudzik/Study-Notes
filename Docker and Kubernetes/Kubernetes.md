@@ -64,7 +64,7 @@ spec:
     app: web
 ```
 
-[IP serwisu]("img/Kubernetes_service_IP.jpg")
+[IP serwisu](../Docker%20and%20Kubernetes/img/Kubernetes_service_IP.jpg)
 
 ## Pods
 
