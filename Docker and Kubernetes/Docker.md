@@ -2,8 +2,8 @@
 
 ## Linki
 
-[https://labs.play-with-docker.com/](play-with-docker)
-[https://www.powershellgallery.com/packages/posh-docker/](Docker posh powershell)
+[play-with-docker](https://labs.play-with-docker.com/)
+[Docker posh powershell](https://www.powershellgallery.com/packages/posh-docker/)
 
 ## Przepływ pracy
 
@@ -15,8 +15,6 @@ Obraz przesyłamy do rejestru za pomocą polecenia `docker image push`.
 
 Uruchomienie obrazu odbywa się za pomocą `docker container run`
 
-
-
 ## Informacje
 
 > Informacje o zainstalowanej wersji
@@ -25,7 +23,6 @@ Uruchomienie obrazu odbywa się za pomocą `docker container run`
 # Informacje o wersji
 docker --version
 ```
-
 > Logowanie do Docker Hub
 
 ```markdown
@@ -36,7 +33,7 @@ docker login
 
 ### Docker file
 
-```markdown
+```dockerfile
 # Wskazanie wersji obrazu na podstawie którego ma być zbudowany nasz obraz, zawiera zainstalowane narzędzia jak np. środowisko startowe.
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal AS base
 
@@ -61,11 +58,8 @@ ENTRYPOINT ["dotnet", "HelloApi.dll"]
 ### Budowanie obrazu z folderu aplikacji
 
 ```bash
+# dodanie tagu -t
 docker image build -t kudzik/webapitest:first .
-```
-
-```bash
--t #tag
 ```
 
 `kudzik` - Docker Hub ID
@@ -73,7 +67,7 @@ docker image build -t kudzik/webapitest:first .
 `:first` - nazwa obrazu
 `.` - kontekst (wszystkie pliki w folderze)
 
-> Podłączenie się w trybie interaktywnym do zbudowanego kontenera
+### Podłączenie się w trybie interaktywnym do zbudowanego kontenera
 
 ```bash
 # obraz alpine
@@ -84,7 +78,7 @@ docker container run -it --name linux alpine sh
 
 :bulb: Jeśli wyjdziemy z trybu interaktywnego przy pomocy `exit` lub `CTRL+C` kontener zostanie zabity, aby wyjść i pozostawić go uruchomionego korzystamy ze skrótu `CTRL+P+Q`.
 
-> Przesłanie zbudowanego obrazu do repozytorium
+### Przesłanie zbudowanego obrazu do repozytorium
 
 ```markdown
 docker image push  kudzik/webapitest
@@ -102,7 +96,7 @@ docker ps
 
 :bulb: Jeśli chcemy sprawdzić wszystkie kontenery nawet te które są zatrzymane musimy dodać flagę `-a`.
 
-> Utworzenie kontenera z obrazu
+### Utworzenie kontenera z obrazu
 
 ```bash
 docker run --name <containerName> -p 8080:8080 kudzik/webapitest
@@ -112,19 +106,19 @@ docker run -d --name <containerName> -p 8080:8080 kudzik/webapitest
 
 :bulb: Jeśli podczas tworzenia kontenera chcemy odłączyć się od jego terminala (uruchomi się w tle) musimy zastosować flagę `-d`
 
-> Uruchomienie istniejącego kontenera
+### Uruchomienie istniejącego kontenera
 
 ```bash
 docker container start <containerId>
 ```
 
-> Zatrzymanie kontenera
+### Zatrzymanie kontenera
 
 ```bash
 docker container stop <containerId>
 ```
 
-> Usuwanie kontenera
+### Usuwanie kontenera
 
 Kontener przed usunięciem musi zostać zatrzymany, jeśli chcemy wymusić usunięcie działającego kontenera stosujemy flagę `-f`.
 
@@ -139,7 +133,7 @@ docker container rm -f <containerId>
 docker ps -a
 ```
 
-## Logi
+### Logi
 
 ```bash
 docker logs <container>
