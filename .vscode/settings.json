@@ -16,6 +16,7 @@
         "Loadbalancer",
         "metallb",
         "multus",
+        "Odmontowanie",
         "oneline",
         "openebs",
         "openfaas",

@@ -359,16 +359,13 @@ ufw enable
 ufw status
 ```
 
-### LVM
-
-`Logical Volume Manager`
+## Zarządzanie dyskami i partycjami
 
 `/dev` - od słowa device
 
 Dyski w systemach linux oznaczane są za pomocą liter `sd` a następnie litera dysku `sda`, `sdb`, `sdc`.
 
 Partycje na dyskach sa oznaczane kolejnymi liczbami `sda1`, `sda2`, `sdb1`, `sdb2`
-
 
 ```bash
 # Informacje o dyskach
@@ -396,12 +393,151 @@ sudo gdisk /dev/sdb
 sudo mkfs.ext4 /dev/sdb1
 ```
 
-Po sformatowaniu partycji należy ją zamontować w systemie plików.
+Po sformatowaniu partycji należy ją zamontować w systemie plików (podpiąć pod katalog).
+O ile nie określimy inaczej montowanie trwa do momentu restartu systemu.
+
+```bash
+mkdir ~/pendrive
+sudo mount /dev/sdb1 ~/pendrive
+
+# Sprawdzenie montowania
+ df -h | grep sd
+
+ # Odmontowanie partycji
+ sudo umount ~/pendrive
+```
+
+:bulb: konieczne może być nadanie uprawnień do dysku dla użytkowników
+
+### LVM
+
+`Logical Volume Manager` - pozwala w łatwy sposób tworzyć i zarządzać partycjami, modyfikować ich wielkość i właściwości bez narażanie się na utratę danych. Dodatkowo w ramach utworzonej grupy możemy wydzielać partycje które będą większe niż fizyczny dysk.
+
+W skład LVM wchodzą:
+
+- woluminy fizyczne (fizyczny dysk lub partycja)
+- grupa LVM (zbiory dysków lub partycji)
+- wolumen logiczny LVM (partycja LVM wydzielona z grupy LVM)
+
+:bulb: Utworzone partycje mogą być taką samą bazą dla wolumenu fizycznego jak podłączony dysk.
+
+:exclamation: Konwersja partycji zniszczy zapisane na niej dane. Dysk w chwili konwersji nie może być zamontowany.
+
+```bash
+#Konwersja partycji na wolumin fizyczny
+sudo pvcreate /dev/sdb1
+
+# Tworzenie grupy woluminów
+sudo vgcreate grupa1 /dev/sdb1 /dev/sdb2
+
+# Wyświetlenie informacji o grupie
+sudo vgdisplay
+
+# Dodawanie nowych wolumenów do grupy
+sudo vgextend grupa1 /dev/sdc
+
+# po utworzeniu grupy można wydzielać na niej logiczne partycje
+sudo lvcreate --name nazwaWoluminu --size 7g grupa1
+
+# Maksymalny pozostały dostępny rozmiar grupy
+sudo lvcreate --name reszta -l 100%FREE grupa1
+
+# Formatowanie partycji
+sudo mkfs.ext4 /dev/mapper/grupa1-samba
+
+# montowanie partycji
+sudo mount /dev/mapper/grupa1-nfs /mnt/nfs
+
+# informacje
+df -h
+
+# Utworzone partycje możemy powiększać w ramach grupy pamiętając o powiększeniu systemu plików w jakim jest sformatowana.
+sudo lvextend --size +1g --resizefs /dev/mapper/grupa1-nfs
+
+# informacje
+sudo lvs
+
+```
+Grupy LVM widoczne są w lokalizacji `/dev/mapper`
+
+Automatyczne montowanie po starcie systemu `/etc/fstab`. Do montowania wykorzystuje się ID partycji.
+
+```bash
+# pobranie ID partycji
+sudo blkid /dev/mapper/grupa1-nfs
+
+# przełączamy się na root
+sudo su
+
+# Wpis ID do fstab za pomocą pipeline
+blkid /dev/mapper/grupa1-nfs | cat >> /etc/fstab
+
+Po edycji pliku format dodanych partycji powinien być następujący
+# /dev/disk/by-uuid/c7b838f1-6c04-4f0d-b63d-91d0df15079c / ext4 defaults 0 1
+# /swap.img       none    swap    sw      0       0
+# UUID="c153bd94-4d05-4fbb-8999-7d6170eedc15" /mnt/nfs ext4
+# UUID="219eb4bf-7c57-4a11-947e-1f555312ef1c" /mnt/reszta ext4
+# UUID="4ce4ba9d-f651-416c-b753-7dbe913d4f64" /mnt/samba ext4
+
+# Sprawdzenie po restarcie
+df -h
+```
+
+## Serwery plików
 
 ### Samba
 
+[Ubuntu tutorial](https://ubuntu.com/tutorials/install-and-configure-samba#1-overview)
+
 `Server Message Block`
 
-### NFS
+Umożliwia dzielenie się plikami pomiędzy maszynami windows i linux, w tym momencie jest to technologia Microsoftu. Na klientach nie jest wymagane żadne dodatkowe oprogramowanie. Protokół umożliwia również dostęp do AD a także serwera wydruku. Usługa działa w tle jako `deamon`.
 
-`Network File System`
+Demon dostępu do plików to `smdb`.
+
+> Instalacja pakietów
+
+```bash
+sudo apt install samba
+```
+
+Udostępnianie plików może być chronione hasłem lub dostęp może być publiczny. Jeśli chcemy udostępniać pliki które wymagają hasła koneczne będzie utworzenie nowego użytkownika. Login i hasło będą wykorzystane do uwierzytelnienia.
+
+```bash
+sudo adduser sambauser
+
+# Dodanie użytkownika do samby i ustalenie hasła, może być inne niż hasło użytkownika.
+sudo smbpasswd -a sambauser
+
+# kopia zapasowa pliku
+sudo cp /etc/samba/smb.conf /etc/samba/smb_old.conf
+```
+
+plik konfiguracji samby `/etc/samba`. Własną konfigurację możemy dodać na dole pliku.
+
+```markdown
+[dane]
+   path = /mnt/reszta
+   browseable = yes
+   read only = no
+[publiczny]
+   path = /mnt/samba
+   browseable = yes
+   readonly = no
+   guest ok = yes
+```
+
+Po zmianach należy zrestartować serwer samby
+
+```bash
+sudo service smbd restart
+
+#Konieczne jest nadanie uprawnień do udostępnianych folderów
+sudo chmod 777 /mnt/samba
+
+# Status usługi
+sudo systemctl status smbd
+
+# Dostęp do plików z poziomu windows po IP serwera np.
+# \\192.168.0.2
+```
