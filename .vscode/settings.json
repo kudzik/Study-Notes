@@ -1,17 +1,21 @@
 {
     "cSpell.words": [
+        "aspnet",
         "brancha",
         "commita",
         "commitem",
         "commitów",
         "commity",
         "diftool",
+        "ENTRYPOINT",
         "gcam",
         "gdisk",
         "glgg",
         "glgp",
         "glog",
         "kube",
+        "Kubernetes",
+        "kudzik",
         "libexec",
         "Loadbalancer",
         "metallb",
@@ -21,6 +25,10 @@
         "openebs",
         "openfaas",
         "portainer",
-        "reflog"
+        "reflog",
+        "WORKDIR"
+    ],
+    "cSpell.ignoreWords": [
+        "dockerignore"
     ]
 }
