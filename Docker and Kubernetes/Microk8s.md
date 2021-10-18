@@ -15,6 +15,8 @@ curl <IP>
 
 ```
 
+:bulb: Dostęp do dashboard z przeglądarki możliwy po jawnym podaniu https
+
 ## Status
 
 ```bash
