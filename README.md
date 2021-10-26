@@ -41,4 +41,3 @@
 
 ### Linux
 
-- [ ] 20211013_Getting Started with Linux
