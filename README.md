@@ -33,6 +33,7 @@
 - [x] 20211010_Getting Started with Docker
 - [x] 20211016_Building and Running Your First Docker App
 - [x] 20211018_Building and Orchestrating Containers with Docker Compose
+- [x] 20211019_Developing Docker Apps: Core Principles
 
 ### Kubernetes
 

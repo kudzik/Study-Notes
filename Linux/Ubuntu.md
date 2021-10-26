@@ -411,6 +411,8 @@ sudo mount /dev/sdb1 ~/pendrive
 
 ### LVM
 
+`lsblk` - informacje o dyskach i partycjach
+
 `Logical Volume Manager` - pozwala w łatwy sposób tworzyć i zarządzać partycjami, modyfikować ich wielkość i właściwości bez narażanie się na utratę danych. Dodatkowo w ramach utworzonej grupy możemy wydzielać partycje które będą większe niż fizyczny dysk.
 
 W skład LVM wchodzą:
